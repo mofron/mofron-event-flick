@@ -58,7 +58,13 @@ module.exports = class extends mofron.class.Event {
 
                 let dif_xpos = p3.event.confmng("st_xpos") - p3.event.confmng("buf_xpos");
 		let dif_ypos = p3.event.confmng("st_ypos") - p3.event.confmng("buf_ypos");
-
+                
+		/* check distance */
+                if ((Math.abs(dif_xpos) < 50) && (Math.abs(dif_ypos) < 50)) {
+                    return;
+		}
+                
+                
 		if (Math.abs(dif_xpos) < Math.abs(dif_ypos)) {
                     if (0 < dif_ypos) {
                         p3.event.execListener("up");
@@ -73,10 +79,6 @@ module.exports = class extends mofron.class.Event {
 		    }
 
 		}
-                
-		//p3.event.confmng("ypos");
-                
-                
 	    }
         } catch (e) {
             console.error(e.stack);
